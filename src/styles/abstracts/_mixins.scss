@@ -1,0 +1,8 @@
+@use "./functions" as *;
+
+@mixin set-typography($fw: null, $fs: null, $lh: null, $ls: null) {
+  font-weight: $fw;
+  font-size: $fs;
+  line-height: $lh;
+  letter-spacing: $ls;
+}

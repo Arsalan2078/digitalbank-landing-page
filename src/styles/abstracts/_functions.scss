@@ -1,0 +1,45 @@
+@use "sass:math";
+@use "sass:map";
+@use "./variables" as *;
+
+@function get-var($a, $b) {
+  @return map.get($variables, $a, $b);
+}
+
+@function to-rem($value) {
+  @return math.div($value, 16px) * 1rem;
+}
+
+@function get-clamp(
+  $min-value,
+  $max-value,
+  $min-size,
+  $max-size,
+  $slope-unit: vw
+) {
+  @if math.unit($min-value) == "px" {
+    $min-value: to-rem($min-value);
+  }
+  @if math.unit($max-value) == "px" {
+    $max-value: to-rem($max-value);
+  }
+  @if math.unit($min-size) == "px" {
+    $min-size: to-rem($min-size);
+  }
+  @if math.unit($max-size) == "px" {
+    $max-size: to-rem($max-size);
+  }
+
+  @if $max-value <= $min-value or $max-size <= $min-size {
+    @error "Max value and (or) size must be bigger than counterparts.";
+  }
+
+  $slope: math.div($max-value - $min-value, $max-size - $min-size);
+  $intercept: $min-value - $min-size * $slope;
+
+  @return clamp(
+    $min-value,
+    calc($intercept + #{$slope * 100}#{$slope-unit}),
+    $max-value
+  );
+}

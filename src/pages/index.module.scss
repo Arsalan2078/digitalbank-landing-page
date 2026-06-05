@@ -1,0 +1,10 @@
+@use "../styles/abstracts/z-index" as abs;
+
+.body {
+  @include abs.set-typography(
+    $fw: var(--fw-400),
+    $fs: var(--fs-14-18),
+    $lh: var(--lh-155),
+    $ls: var(--ls-neg-000-025)
+  );
+}

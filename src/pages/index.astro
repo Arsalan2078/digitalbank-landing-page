@@ -1,5 +1,7 @@
 ---
 import { getCollection } from "astro:content";
+import "../styles/globals.scss";
+import css from "./index.module.scss";
 
 const [features, latestArticles] = [
   await getCollection("features"),
@@ -15,7 +17,7 @@ const [features, latestArticles] = [
     <meta name="generator" content={Astro.generator} />
     <title>Frontend Mentor | Digitalbank landing page</title>
   </head>
-  <body>
+  <body class={css.body}>
     <nav>
       Home
       About
